@@ -19,10 +19,12 @@ class Bird {
   show() {
     const pos = this.body.position;
     const angle = this.body.angle;
+    fill(120);
     push();
     translate(pos.x, pos.y);
     //rotate(angle);
     //imageMode(CENTER);
+    //image(ballImg, 0, 0, this.r * 2, this.r * 2);
     circle(0, 0, this.r * 2, this.r * 2);
     pop();
 
