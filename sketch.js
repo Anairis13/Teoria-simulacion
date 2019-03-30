@@ -3,10 +3,10 @@ const { Engine, World, Bodies, Mouse, MouseConstraint, Constraint } = Matter;
 
 var ground;
 const boxes = [];
-var bird;
+var bird = [];
 var world, engine;
 var mConstraint;
-var slingshot;
+var slingshot = [];
 
 function setup() {
    console.log(Matter);
@@ -14,12 +14,14 @@ function setup() {
   engine = Engine.create();
   world = engine.world;
   ground = new Ground(width / 2, height - 10, width, 20);
-  for (let i = 0; i < 3; i++) {
+  /*for (let i = 0; i < 3; i++) {
     boxes[i] = new Box(windowWidth*0.8, windowHeight*0.8 - i * windowHeight*0.1 , windowHeight*0.10,  windowWidth*0.08);
-  }
-  bird = new Bird(windowWidth*0.15, windowHeight*0.70, windowWidth*0.015);
+}*/
+  bird[1] = new Bird(windowWidth*0.15, windowHeight*0.70, windowWidth*0.012);
+  bird[0] = new Bird(windowWidth*0.85, windowHeight*0.70, windowWidth*0.012);
 
-  slingshot = new SlingShot(windowWidth*0.15, windowHeight*0.70, bird.body);
+  slingshot[0] = new SlingShot(windowWidth*0.85, windowHeight*0.70, bird[0].body);
+  slingshot[1] = new SlingShot(windowWidth*0.15, windowHeight*0.70, bird[1].body);
 
   const mouse = Mouse.create(canvas.elt);
   const options = {
@@ -38,21 +40,29 @@ function draw() {
   for (let box of boxes) {
     box.show();
   }
-  slingshot.show();
-  bird.show();
+  slingshot[0].show();
+  slingshot[1].show();
+  bird[0].show();
+  bird[1].show();
 }
 
 function keyPressed() {
   if (key == ' ') {
-    World.remove(world, bird.body);
-    bird = new Bird(windowWidth*0.15, windowHeight*0.70, windowWidth*0.01);
-    slingshot.attach(bird.body);
+    World.remove(world, bird[0].body);
+    World.remove(world, bird[1].body);
+    //bird = new Bird(windowWidth*0.15, windowHeight*0.70, windowWidth*0.015);
+    bird[1] = new Bird(windowWidth*0.15, windowHeight*0.70, windowWidth*0.012);
+    bird[0] = new Bird(windowWidth*0.85, windowHeight*0.70, windowWidth*0.012);
+    slingshot[0].attach(bird[0].body);
+    slingshot[1].attach(bird[1].body);
   }
 
 }
 
+
 function mouseReleased() {
   setTimeout(() => {
-    slingshot.fly();
+     slingshot[1].fly();
+     slingshot[0].fly();
 }, 50);
 }
