@@ -1,6 +1,6 @@
-// Angry Birds
+// Angry bolas
 // Daniel Shiffman
-// https://thecodingtrain.com/CodingChallenges/138-angry-birds.html
+// https://thecodingtrain.com/CodingChallenges/138-angry-bolas.html
 // https://youtu.be/TDQzoe9nslY
 // https://editor.p5js.org/codingtrain/sketches/LbNt1nyxE
 
