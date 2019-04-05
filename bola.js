@@ -12,7 +12,7 @@ class Bola {
     show() {
         const pos = this.body.position;
         const angle = this.body.angle;
-        fill(120);
+        //fill(120);
         push();
         translate(pos.x, pos.y);
         rotate(angle);
