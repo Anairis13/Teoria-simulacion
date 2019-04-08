@@ -1,7 +1,7 @@
 class Bola {
     constructor(x, y, r) {
         const options = {
-            restitution: 1.5
+            restitution: 0.9
         }
         this.body = Matter.Bodies.circle(x, y, r, options);
         Matter.Body.setMass(this.body, this.body.mass * 4);
@@ -18,7 +18,6 @@ class Bola {
         rotate(angle);
         imageMode(CENTER);
         image(ballImg, 0, 0, this.r * 2, this.r * 2);
-        //circle(0, 0, this.r * 2, this.r * 2);
         pop();
 
     }

@@ -7,9 +7,12 @@
 class Box {
   constructor(x, y, w, h) {
     const options = {
-      restitution: 0.5
+      restitution: 0.5,
+      isStatic: true,
     }
+    //this.body.isStatic = true;
     this.body = Matter.Bodies.rectangle(x, y, w, h, options);
+    this.body.isStatic = true;
     Matter.World.add(world, this.body);
     this.w = w;
     this.h = h;
@@ -22,9 +25,9 @@ class Box {
     push();
     translate(pos.x, pos.y);
     rotate(angle);
-    fill(255);
+    fill(0,255,0);
     rectMode(CENTER);
-    imageMode(CENTER);
+    //imageMode(CENTER);
     rect(0, 0, this.w, this.h);
     pop();
 

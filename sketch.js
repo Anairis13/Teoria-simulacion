@@ -3,7 +3,7 @@ const {World, Bodies, Mouse, MouseConstraint, Constraint } = Matter;
 var   Events = Matter.Events,
       Engine = Matter.Engine;
 var ground;
-const boxes = [];
+var box;
 var bola = [];
 var world, engine;
 var mConstraint;
@@ -12,7 +12,17 @@ var tamanioBola;
 var ballImg;
 var tamanioAncho;
 var tamanioAlto;
-var contadorBolas = 2;
+var contadorBolas = 1;
+var mouse;
+var malla;
+var Composites = Matter.Composites;
+var cuadradoPrueba;
+var Body = Matter.Body;
+var backboard;
+var group;
+var particleOptions;
+var cloth;
+// var group;
 
 function preload() {
     ballImg = loadImage('ball.png');
@@ -33,14 +43,11 @@ $(document).ready(function() {
    }
 
    if ( windowHeight < 500 ) {
-      console.log(windowHeight);
       tamanioAlto = windowHeight*0.69 ;
    } else{
       if (windowHeight < 900) {
-         console.log(windowHeight);
          tamanioAlto = windowHeight*0.75;
       } else {
-         console.log(windowHeight);
          tamanioAlto = windowHeight*0.81;
       }
    }
@@ -50,19 +57,34 @@ $(document).ready(function() {
 function setup() {
     const canvas = createCanvas(windowWidth, windowHeight - 4);
     engine = Engine.create();
-    console.log(engine);
     world = engine.world;
-    ground = new Ground(width / 2, height - 10, width, 20);
+    ground = new Ground(width / 2, height , width, 20);
     //creación de la primera bola
-    bola[1] = new Bola(tamanioAncho, tamanioAlto, tamanioBola);
+    bola[0] = new Bola(windowWidth - tamanioAncho, tamanioAlto, tamanioBola);
+    //box = new Box(windowWidth - tamanioAncho, windowHeight  - tamanioAlto, tamanioBola*3, 10);
     //creación de la onda que lanzará las bolas
-    slingshot = new SlingShot(tamanioAncho,tamanioAlto, bola[1].body);
+    slingshot = new SlingShot(windowWidth - tamanioAncho,tamanioAlto, bola[0].body);
+    //cuadradoPrueba = rect(200, 200, 50, 100 );
+    // console.log(cuadradoPrueba);
+    /********************************************************************************/
 
-    const mouse = Mouse.create(canvas.elt);
+   group = Body.nextGroup(true);
+   particleOptions = { friction: 0.00001, collisionFilter: { group: group}, render: { visible: true } };
+   cloth = Composites.softBody(95, 150, 5, 5, 8, 5, false, tamanioBola*0.2, particleOptions);
+   backboard = new Box (100, 100, 1, 110 );
+
+   cloth.bodies[0].isStatic = true;
+   cloth.bodies[4].isStatic = true;
+   console.log(cloth.bodies);
+   World.add(world, cloth);
+   World.add(world, backboard);
+
+    /*******************************************************************************/
+
+    mouse = Mouse.create(canvas.elt);
     const options = {
         mouse: mouse
     }
-
     mouse.pixelRatio = pixelDensity();
     mConstraint = MouseConstraint.create(engine, options);
     World.add(world, mConstraint);
@@ -70,70 +92,43 @@ function setup() {
 
 
 function draw() {
-    background(255)
-    Matter.Engine.update(engine);
+    background(248);
+    Engine.update(engine);
     ground.show();
-    // for (var box of boxes) {
-    //     box.show();
-    // }
     slingshot.show();
-    for ( i = 1 ; i < contadorBolas ; i++ ) {
+    for ( i = 0 ; i < contadorBolas ; i++ ) {
       bola[i].show();
    }
-   // if (mConstraint.body){
-   //    var position = mConstraint.body.position;
-   //    var m = mConstraint.mouse.position;
-   //    var sligPosition = slingshot.sling.pointA;
-   //
-   //    stroke(0,255,0);
-   //    line(position.x, position.y, m.x, m.y);
-   //    console.log(mConstraint);
-   //    // if (  mConstraint.mouse.mousedown && mConstraint.mouse.mouseEvents ) {
-   //    //          console.log('arrastrar y solar');
-   //    // }
-   //    // //console.log(mConstraint.body);
-   //
-   // }
+   stroke(0);
+   strokeWeight(4);
+   //box.show();
+   backboard.show();
+   line(cloth.bodies[0].position.x, cloth.bodies[0].position.y, cloth.bodies[4].position.x, cloth.bodies[4].position.y);
+   for (var i = 0; i < cloth.bodies.length-1; i++) {
+      rect(cloth.bodies[i].position.x, cloth.bodies[i].position.y, 1, 1);
+      line(cloth.bodies[i].position.x, cloth.bodies[i].position.y, cloth.bodies[i+1].position.x, cloth.bodies[i+1].position.y);
+   }
+   line(cloth.bodies[0].position.x, cloth.bodies[0].position.y, cloth.bodies[5].position.x, cloth.bodies[5].position.y);
+   line(cloth.bodies[5].position.x, cloth.bodies[5].position.y, cloth.bodies[10].position.x, cloth.bodies[10].position.y);
+   line(cloth.bodies[10].position.x, cloth.bodies[10].position.y, cloth.bodies[15].position.x, cloth.bodies[15].position.y);
+   line(cloth.bodies[15].position.x, cloth.bodies[15].position.y, cloth.bodies[20].position.x, cloth.bodies[20].position.y);
+   line(cloth.bodies[4].position.x, cloth.bodies[4].position.y, cloth.bodies[9].position.x, cloth.bodies[9].position.y);
+   line(cloth.bodies[9].position.x, cloth.bodies[9].position.y, cloth.bodies[14].position.x, cloth.bodies[14].position.y);
+   line(cloth.bodies[14].position.x, cloth.bodies[14].position.y, cloth.bodies[19].position.x, cloth.bodies[19].position.y);
+   line(cloth.bodies[19].position.x, cloth.bodies[19].position.y, cloth.bodies[24].position.x, cloth.bodies[24].position.y);
 }
 
 
-// Events.on(engine, 'tick', function(event) {
-//     if (engine.input.mouse.button === -1 && (bola[tamanioBola].position.x > 190 || bola[tamanioBola].position.y < 330)) {
-//         //bola[tamanioBola] = Bodies.polygon(170, 350, 20, 35, rockOptions);
-//         // ball.push(elastic.bodyB)
-//         // World.add(engine.world, rock);
-//         // elastic.bodyB = rock;
-//         console.log(engine);
-//         console.log(event)
-//     }
-// });
-
 function mouseReleased( event ) {
-      //console.log(event);
-      if (mConstraint.body){
-         // var position = mConstraint.body.position;
-         // var m = mConstraint.mouse.position;
-         // var sligPosition = slingshot.sling.pointA;
-         //
-         // stroke(0,255,0);
-         // line(position.x, position.y, m.x, m.y);
-         console.log(mConstraint);
-         // if (  mConstraint.mouse.mousedown && mConstraint.mouse.mouseEvents ) {
-         //          console.log('arrastrar y solar');
-         // }
-         // //console.log(mConstraint.body);
+      if (bola[contadorBolas - 1].body == mConstraint.body ) {
          setTimeout(() => {
           slingshot.fly();
           setTimeout( () => {
-                bola[contadorBolas] = new Bola (tamanioAncho, tamanioAlto, tamanioBola);
+                bola[contadorBolas] = new Bola (windowWidth - tamanioAncho, tamanioAlto, tamanioBola);
                 draw();
                 slingshot.attach(bola[contadorBolas].body);
                 contadorBolas++;
-             }, 300);
-         }, 50);
-         console.log('soltar');
-
+             }, 200);
+         }, 70);
       }
-
-
 }
