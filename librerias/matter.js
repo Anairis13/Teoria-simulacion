@@ -4084,12 +4084,6 @@ var Bounds = _dereq_('../geometry/Bounds');
             MouseConstraint.update(mouseConstraint, allBodies);
             MouseConstraint._triggerEvents(mouseConstraint);
         });
-
-         Events.on(engine, 'tick', function(event) {
-             var allBodies = Composite.allBodies(engine.world);
-             MouseConstraint.update(mouseConstraint, allBodies);
-         });
-
         return mouseConstraint;
     };
     //      MouseConstraint.create = function(engine, options) {
