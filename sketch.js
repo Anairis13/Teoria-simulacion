@@ -66,8 +66,6 @@ function setup() {
     slingshot = new SlingShot(windowWidth - tamanioAncho,tamanioAlto, bola[0].body);
     //cuadradoPrueba = rect(200, 200, 50, 100 );
     // console.log(cuadradoPrueba);
-
-
     /********************************************************************************/
 
    group = Body.nextGroup(true);
@@ -77,6 +75,7 @@ function setup() {
 
    cloth.bodies[0].isStatic = true;
    cloth.bodies[4].isStatic = true;
+   console.log(cloth.bodies);
    World.add(world, cloth);
    World.add(world, backboard);
 
@@ -89,20 +88,6 @@ function setup() {
     mouse.pixelRatio = pixelDensity();
     mConstraint = MouseConstraint.create(engine, options);
     World.add(world, mConstraint);
-
-    console.log(bola[contadorBolas-1]);
-    console.log(engine);
-    console.log(cloth.bodies);
-    console.log(bola);
-
-
-    // Events.on(engine, 'beforeUpdate', function ( event ) {
-    //   for (var i = 0; i < bola.length; i++) {
-    //       if (bola[i].body.position.x > 99 && bola[i].body.position.x < (99 + tamanioBola*0.2) && bola[i].body.position.y > 154 && bola[i].body.position.y < 156) {
-    //           console.log('lo he logrado');
-    //       }
-    //   }
-    // });
 }
 
 
@@ -135,15 +120,15 @@ function draw() {
 
 
 function mouseReleased( event ) {
-   if (bola[contadorBolas - 1].body == mConstraint.body ) {
-      setTimeout(() => {
-       slingshot.fly();
-       setTimeout( () => {
-             bola[contadorBolas] = new Bola (windowWidth - tamanioAncho, tamanioAlto, tamanioBola);
-             draw();
-             slingshot.attach(bola[contadorBolas].body);
-             contadorBolas++;
-          }, 200);
-      }, 70);
-   }
+      if (bola[contadorBolas - 1].body == mConstraint.body ) {
+         setTimeout(() => {
+          slingshot.fly();
+          setTimeout( () => {
+                bola[contadorBolas] = new Bola (windowWidth - tamanioAncho, tamanioAlto, tamanioBola);
+                draw();
+                slingshot.attach(bola[contadorBolas].body);
+                contadorBolas++;
+             }, 200);
+         }, 70);
+      }
 }
