@@ -22,37 +22,34 @@ var backboard;
 var group;
 var particleOptions;
 var cloth;
+var puntuacion = 0;
 // var group;
 
 function preload() {
     ballImg = loadImage('ball.png');
-}
-
-$(document).ready(function() {
-   if ( windowWidth < 500 ) {
+    if ( windowWidth < 500 ) {
       tamanioBola = windowWidth * 0.04;
       tamanioAncho = windowWidth*0.25;
-   } else{
+    } else{
       if (windowWidth < 900) {
-         tamanioBola = windowWidth * 0.03;
-         tamanioAncho = windowWidth*0.18;
+          tamanioBola = windowWidth * 0.03;
+          tamanioAncho = windowWidth*0.18;
       } else {
-         tamanioBola = windowWidth * 0.020;
-         tamanioAncho = windowWidth*0.15;
+          tamanioBola = windowWidth * 0.020;
+          tamanioAncho = windowWidth*0.15;
       }
-   }
+    }
 
-   if ( windowHeight < 500 ) {
+    if ( windowHeight < 500 ) {
       tamanioAlto = windowHeight*0.69 ;
-   } else{
+    } else{
       if (windowHeight < 900) {
-         tamanioAlto = windowHeight*0.75;
+          tamanioAlto = windowHeight*0.75;
       } else {
-         tamanioAlto = windowHeight*0.81;
+          tamanioAlto = windowHeight*0.81;
       }
-   }
-});
-
+    }
+}
 
 function setup() {
     const canvas = createCanvas(windowWidth, windowHeight - 4);
@@ -80,6 +77,8 @@ function setup() {
    World.add(world, cloth);
    World.add(world, backboard);
 
+
+   console.log(cloth.bodies[0].position.y);
     /*******************************************************************************/
 
     mouse = Mouse.create(canvas.elt);
@@ -95,14 +94,6 @@ function setup() {
     console.log(cloth.bodies);
     console.log(bola);
 
-
-    // Events.on(engine, 'beforeUpdate', function ( event ) {
-    //   for (var i = 0; i < bola.length; i++) {
-    //       if (bola[i].body.position.x > 99 && bola[i].body.position.x < (99 + tamanioBola*0.2) && bola[i].body.position.y > 154 && bola[i].body.position.y < 156) {
-    //           console.log('lo he logrado');
-    //       }
-    //   }
-    // });
 }
 
 
@@ -131,6 +122,17 @@ function draw() {
    line(cloth.bodies[9].position.x, cloth.bodies[9].position.y, cloth.bodies[14].position.x, cloth.bodies[14].position.y);
    line(cloth.bodies[14].position.x, cloth.bodies[14].position.y, cloth.bodies[19].position.x, cloth.bodies[19].position.y);
    line(cloth.bodies[19].position.x, cloth.bodies[19].position.y, cloth.bodies[24].position.x, cloth.bodies[24].position.y);
+   // for (var i = 0; i < bola.length; i++) {
+   if (contadorBolas >= 2) {
+      if (((bola[contadorBolas - 2 ].body.position.y + 1) >= (cloth.bodies[0].position.y - 1))  &&  ((bola[contadorBolas - 2].body.position.y - 1) <= (cloth.bodies[0].position.y + 1)) && ((bola[contadorBolas - 2 ].body.position.x) >= (cloth.bodies[0].position.x))  &&  ((bola[contadorBolas - 2].body.position.x) <= (cloth.bodies[4].position.x) )) {
+         // if () {
+            // console.log('yes, we can');
+            puntuacion = puntuacion + 1;
+            console.log('puntuacion: ' + puntuacion);
+         // }
+      }
+   }
+   // }
 }
 
 
