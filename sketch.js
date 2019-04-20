@@ -23,6 +23,7 @@ var group;
 var particleOptions;
 var cloth;
 var puntuacion = 0;
+var idRep = null;
 // var group;
 
 function preload() {
@@ -123,15 +124,21 @@ function draw() {
    line(cloth.bodies[14].position.x, cloth.bodies[14].position.y, cloth.bodies[19].position.x, cloth.bodies[19].position.y);
    line(cloth.bodies[19].position.x, cloth.bodies[19].position.y, cloth.bodies[24].position.x, cloth.bodies[24].position.y);
    // for (var i = 0; i < bola.length; i++) {
-   if (contadorBolas >= 2) {
-      if (((bola[contadorBolas - 2 ].body.position.y + 1) >= (cloth.bodies[0].position.y - 1))  &&  ((bola[contadorBolas - 2].body.position.y - 1) <= (cloth.bodies[0].position.y + 1)) && ((bola[contadorBolas - 2 ].body.position.x) >= (cloth.bodies[0].position.x))  &&  ((bola[contadorBolas - 2].body.position.x) <= (cloth.bodies[4].position.x) )) {
-         // if () {
-            // console.log('yes, we can');
-            puntuacion = puntuacion + 1;
-            console.log('puntuacion: ' + puntuacion);
-         // }
+//   setTimeout( () => {
+      if (contadorBolas >= 2) {
+         if (((bola[contadorBolas - 2 ].body.position.y) >= (cloth.bodies[0].position.y ))  &&  ((bola[contadorBolas - 2].body.position.y ) <= (cloth.bodies[0].position.y + 10))) {
+            if ( ((bola[contadorBolas - 2 ].body.position.x) >= (cloth.bodies[0].position.x))  &&  ((bola[contadorBolas - 2].body.position.x) <= (cloth.bodies[4].position.x) )) {
+               // console.log('yes, we can');
+
+               if (idRep !== bola[contadorBolas - 2 ].body.id ) {
+                  puntuacion = puntuacion + 1;
+                  console.log('puntuacion: ' + puntuacion)
+                  idRep = bola[contadorBolas - 2 ].body.id;
+               }
+            }
+         }
       }
-   }
+//   }, 20 );
    // }
 }
 
