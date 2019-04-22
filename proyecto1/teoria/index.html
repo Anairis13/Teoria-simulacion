@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link REL=StyleSheet HREF="css/bootstrap.min.css" TYPE="text/css" MEDIA=screen>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+    
+</head>
+<body>
+    
+    <div class="container jumbotron separacion2 diseno">
+        <div class="row">
+                
+            <div class="col-4 centro">
+                    <h4 class="separacion">EFICIENCIA DE EMPLEADOS</h4>
+                    <input type="text" id="dias" placeholder="Cantidad de Dias" class="form-control" >
+                    <button  id="btn-calcular" class="form-control">CALCULAR</button>
+            </div>
+            <!-- <input type="text" id="horasT" placeholder="horas total de Trabajo" > -->
+          
+
+        </div>
+        <div id="texto">
+
+        </div>
+    </div>
+    <div class="container jumbotron diseno" style="display:none" id="contenedorTabla" >
+        <div class="row" >
+            <div class="col-12">
+                <table class="table" id="tabla">
+                    <thead>
+                        <tr >
+                          <th>N° Empleados</th>
+                          <th>Dia Trabajo</th>
+                          <th>Horas de Trabjajo</th>
+                          <th>Porcentaje Utilizacion</th>
+                      </tr>
+                    </thead>
+                    <tbody id="cuerpoTabla"> 
+
+                    </tbody>
+
+                                      
+                </table>
+            </div>            
+        </div>
+
+
+    </div>
+    <div class="container jumbotron diseno" style="display:none" id="contenedorGrafica">
+        <div><h4>Porcentaje diario de los empleados</h4></div>
+        <div>
+            <canvas id="myChart" width="400" height="100"></canvas>
+        </div>
+        <div id="texto">
+
+        </div>
+    </div>
+
+
+    <script src="js/Chart.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"> </script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/controlador.js" ></script> 
+   
+</body>
+</html>
