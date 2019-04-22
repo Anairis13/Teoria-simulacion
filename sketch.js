@@ -2,6 +2,8 @@
 const {World, Bodies, Mouse, MouseConstraint, Constraint } = Matter;
 var   Events = Matter.Events,
       Engine = Matter.Engine;
+      
+     
 var ground;
 var box;
 var bola = [];
@@ -24,6 +26,9 @@ var particleOptions;
 var cloth;
 var puntuacion = 0;
 var idRep = null;
+var scoreText;
+var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {preload: preload, create: create, update: update});
+
 // var group;
 
 function preload() {
@@ -131,13 +136,18 @@ function draw() {
                // console.log('yes, we can');
 
                if (idRep !== bola[contadorBolas - 2 ].body.id ) {
+                  scoreText = game.add.text(5, 5, 'puntuacion: 0', { font: '18px Arial', fill: '#0095DD' });
                   puntuacion = puntuacion + 1;
+                  puntuacion+=10;
+                  scoreText.setText('Points: '+puntuacion);
                   console.log('puntuacion: ' + puntuacion)
                   idRep = bola[contadorBolas - 2 ].body.id;
                }
             }
          }
       }
+      //scoreText.setText('Points: '+puntuacion);
+      //scoreText = game.add.text(5, 5, 'Points: 0', { font: '18px Arial', fill: '#0095DD' });
 //   }, 20 );
    // }
 }
@@ -156,3 +166,5 @@ function mouseReleased( event ) {
       }, 70);
    }
 }
+
+
