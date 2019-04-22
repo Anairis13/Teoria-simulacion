@@ -3,6 +3,8 @@ $("#btn-calcular").click(function(){
     $("#contenedorTabla").css("display","block");
     $("#contenedorGrafica").css("display","block");
     document.getElementById('cuerpoTabla').innerHTML ="";
+
+    // variables entrada, salida, estado
     var CantidadDias = $("#dias").val(); //entrada
     var cantidadTecnicos = 4; //estado
     var JornadaTrabajo = 8; // entrada
@@ -14,6 +16,7 @@ $("#btn-calcular").click(function(){
     var resO = 0; // resultado ordinario
     var resP = 0; //resultado Prioritario
     var porcentaje = [];
+    var pT=0; //porcentaje total
     var dia = [];  
 
     for (var i = 0; i < CantidadDias; i++) {
@@ -21,9 +24,9 @@ $("#btn-calcular").click(function(){
         resO = horasTotal*ordenOrdinaria;
         resP = horasTotal-resO; 
         x [i]= ((resO* tiempOrdinaria ) + ( resP*tiempoPrioritaria))/ (JornadaTrabajo*cantidadTecnicos);
+        pT+=x[i];
         porcentaje[i] = x[i]*100;
         dia[i]= i;
-
         document.getElementById('cuerpoTabla').innerHTML +=`
         <tr>
             <td>${cantidadTecnicos}</td>
@@ -33,7 +36,10 @@ $("#btn-calcular").click(function(){
         </tr> 
         `; 
     }
-
+    pT=(pT*100)/CantidadDias;
+    document.getElementById('porcentaje').innerHTML =`
+    El Porcentaje de ultilización total para <spam class="color">${CantidadDias}</spam> dias es: <spam class="color">${pT}% </spam>
+    `;
     grafica(CantidadDias,dia, porcentaje);        
 });
 

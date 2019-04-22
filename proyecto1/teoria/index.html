@@ -14,8 +14,10 @@
     <div class="container jumbotron separacion2 diseno">
         <div class="row">
                 
-            <div class="col-4 centro">
-                    <h4 class="separacion">EFICIENCIA DE EMPLEADOS</h4>
+            <div class="col-10 centro">
+                    <h4 class="separacion centro">EFICIENCIA DE EMPLEADOS</h4>
+                    <h5>Indicaciones:</h5><br>
+                    <h6>Para medir el rendimiento de los empleados debe indicar la cantidad de dias que desea medir, seguidamente se calcula el porcentaje de efeciencia de los empleados por dia  </h6>
                     <input type="text" id="dias" placeholder="Cantidad de Dias" class="form-control" >
                     <button  id="btn-calcular" class="form-control">CALCULAR</button>
             </div>
@@ -36,7 +38,7 @@
                           <th>N° Empleados</th>
                           <th>Dia Trabajo</th>
                           <th>Horas de Trabjajo</th>
-                          <th>Porcentaje Utilizacion</th>
+                          <th>Porcentaje Utilización (%)</th>
                       </tr>
                     </thead>
                     <tbody id="cuerpoTabla"> 
@@ -45,6 +47,7 @@
 
                                       
                 </table>
+                <span id="porcentaje"></span>
             </div>            
         </div>
 
