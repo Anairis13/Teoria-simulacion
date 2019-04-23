@@ -2,8 +2,8 @@
 const {World, Bodies, Mouse, MouseConstraint, Constraint } = Matter;
 var   Events = Matter.Events,
       Engine = Matter.Engine;
-      
-     
+
+
 var ground;
 var box;
 var bola = [];
@@ -25,9 +25,9 @@ var group;
 var particleOptions;
 var cloth;
 var puntuacion = 0;
-var idRep = null;
-var scoreText;
-var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {preload: preload, create: create, update: update});
+// var idRep = null;
+// var scoreText;
+// var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {preload: preload, create: create, update: update});
 
 // var group;
 
@@ -135,14 +135,14 @@ function draw() {
             if ( ((bola[contadorBolas - 2 ].body.position.x) >= (cloth.bodies[0].position.x))  &&  ((bola[contadorBolas - 2].body.position.x) <= (cloth.bodies[4].position.x) )) {
                // console.log('yes, we can');
 
-               if (idRep !== bola[contadorBolas - 2 ].body.id ) {
-                  scoreText = game.add.text(5, 5, 'puntuacion: 0', { font: '18px Arial', fill: '#0095DD' });
+               // if (idRep !== bola[contadorBolas - 2 ].body.id ) {
+               //    scoreText = game.add.text(5, 5, 'puntuacion: 0', { font: '18px Arial', fill: '#0095DD' });
                   puntuacion = puntuacion + 1;
-                  puntuacion+=10;
-                  scoreText.setText('Points: '+puntuacion);
+               //    puntuacion+=10;
+               //    scoreText.setText('Points: '+puntuacion);
                   console.log('puntuacion: ' + puntuacion)
-                  idRep = bola[contadorBolas - 2 ].body.id;
-               }
+               //    idRep = bola[contadorBolas - 2 ].body.id;
+               // }
             }
          }
       }
@@ -166,5 +166,3 @@ function mouseReleased( event ) {
       }, 70);
    }
 }
-
-
