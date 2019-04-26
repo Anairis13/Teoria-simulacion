@@ -25,7 +25,7 @@ var group;
 var particleOptions;
 var cloth;
 var puntuacion = 0;
-// var idRep = null;
+var idRep = null;
 // var scoreText;
 // var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {preload: preload, create: create, update: update});
 
@@ -128,24 +128,23 @@ function draw() {
    line(cloth.bodies[9].position.x, cloth.bodies[9].position.y, cloth.bodies[14].position.x, cloth.bodies[14].position.y);
    line(cloth.bodies[14].position.x, cloth.bodies[14].position.y, cloth.bodies[19].position.x, cloth.bodies[19].position.y);
    line(cloth.bodies[19].position.x, cloth.bodies[19].position.y, cloth.bodies[24].position.x, cloth.bodies[24].position.y);
-   // for (var i = 0; i < bola.length; i++) {
-//   setTimeout( () => {
-      if (contadorBolas >= 2) {
-         if (((bola[contadorBolas - 2 ].body.position.y) >= (cloth.bodies[0].position.y ))  &&  ((bola[contadorBolas - 2].body.position.y ) <= (cloth.bodies[0].position.y + 10))) {
-            if ( ((bola[contadorBolas - 2 ].body.position.x) >= (cloth.bodies[0].position.x))  &&  ((bola[contadorBolas - 2].body.position.x) <= (cloth.bodies[4].position.x) )) {
-               // console.log('yes, we can');
 
-               // if (idRep !== bola[contadorBolas - 2 ].body.id ) {
-               //    scoreText = game.add.text(5, 5, 'puntuacion: 0', { font: '18px Arial', fill: '#0095DD' });
-                  puntuacion = puntuacion + 1;
-               //    puntuacion+=10;
-               //    scoreText.setText('Points: '+puntuacion);
-                  console.log('puntuacion: ' + puntuacion)
-               //    idRep = bola[contadorBolas - 2 ].body.id;
-               // }
-            }
+   if (contadorBolas >= 2) {
+      if (( ((bola[contadorBolas - 2 ].body.position.y) >= (cloth.bodies[0].position.y ))  &&
+            ((bola[contadorBolas - 2].body.position.y ) <= (cloth.bodies[0].position.y + 10))) &&
+            (((bola[contadorBolas - 2 ].body.position.x) >= (cloth.bodies[0].position.x ))  &&
+            ((bola[contadorBolas - 2].body.position.x ) <= (cloth.bodies[4].position.x)) )) {
+         if (idRep !== bola[contadorBolas - 2 ].body.id ) {
+         //    scoreText = game.add.text(5, 5, 'puntuacion: 0', { font: '18px Arial', fill: '#0095DD' });
+            puntuacion = puntuacion + 1;
+         //    puntuacion+=10;
+         //    scoreText.setText('Points: '+puntuacion);
+            console.log('puntuacion: ' + puntuacion)
+            idRep = bola[contadorBolas - 2 ].body.id;
          }
       }
+   }
+
       //scoreText.setText('Points: '+puntuacion);
       //scoreText = game.add.text(5, 5, 'Points: 0', { font: '18px Arial', fill: '#0095DD' });
 //   }, 20 );
