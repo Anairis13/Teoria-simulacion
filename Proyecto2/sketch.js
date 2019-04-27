@@ -26,10 +26,12 @@ var particleOptions;
 var cloth;
 var puntuacion = 0;
 var idRep = null;
-// var scoreText;
-// var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {preload: preload, create: create, update: update});
+var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {preload: preload, create: create, update: update});
+var score=0;
+
 
 // var group;
+
 
 function preload() {
     ballImg = loadImage('ball.png');
@@ -82,9 +84,6 @@ function setup() {
    cloth.bodies[4].isStatic = true;
    World.add(world, cloth);
    World.add(world, backboard);
-
-
-   console.log(cloth.bodies[0].position.y);
     /*******************************************************************************/
 
     mouse = Mouse.create(canvas.elt);
@@ -94,12 +93,6 @@ function setup() {
     mouse.pixelRatio = pixelDensity();
     mConstraint = MouseConstraint.create(engine, options);
     World.add(world, mConstraint);
-
-    console.log(bola[contadorBolas-1]);
-    console.log(engine);
-    console.log(cloth.bodies);
-    console.log(bola);
-
 }
 
 
@@ -135,20 +128,13 @@ function draw() {
             (((bola[contadorBolas - 2 ].body.position.x) >= (cloth.bodies[0].position.x ))  &&
             ((bola[contadorBolas - 2].body.position.x ) <= (cloth.bodies[4].position.x)) )) {
          if (idRep !== bola[contadorBolas - 2 ].body.id ) {
-         //    scoreText = game.add.text(5, 5, 'puntuacion: 0', { font: '18px Arial', fill: '#0095DD' });
+            score++;
             puntuacion = puntuacion + 1;
-         //    puntuacion+=10;
-         //    scoreText.setText('Points: '+puntuacion);
             console.log('puntuacion: ' + puntuacion)
             idRep = bola[contadorBolas - 2 ].body.id;
          }
       }
    }
-
-      //scoreText.setText('Points: '+puntuacion);
-      //scoreText = game.add.text(5, 5, 'Points: 0', { font: '18px Arial', fill: '#0095DD' });
-//   }, 20 );
-   // }
 }
 
 
