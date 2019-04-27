@@ -26,7 +26,7 @@ var particleOptions;
 var cloth;
 var puntuacion = 0;
 var idRep = null;
-var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {preload: preload, create: create, update: update});
+// var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {preload: preload, create: create, update: update});
 var score=0;
 
 
@@ -104,7 +104,7 @@ function draw() {
     for ( i = 0 ; i < contadorBolas ; i++ ) {
       bola[i].show();
    }
-   stroke(0);
+   stroke(1);
    strokeWeight(4);
    //box.show();
    backboard.show();
@@ -149,5 +149,13 @@ function mouseReleased( event ) {
              contadorBolas++;
           }, 200);
       }, 70);
+   }
+}
+
+function mouseDragged ( event ) {
+   if (bola[contadorBolas - 1].body == mConstraint.body ) {
+      if (mConstraint.body.angle !== 0) {
+         console.log(bola[contadorBolas - 1 ].body.angle);
+      }
    }
 }
