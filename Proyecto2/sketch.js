@@ -155,7 +155,7 @@ function mouseReleased( event ) {
 function mouseDragged ( event ) {
    if (bola[contadorBolas - 1].body == mConstraint.body ) {
       if (mConstraint.body.angle !== 0) {
-         console.log(bola[contadorBolas - 1 ].body.angle);
+         
       }
    }
 }
