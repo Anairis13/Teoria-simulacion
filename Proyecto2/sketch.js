@@ -24,10 +24,9 @@ var backboard;
 var group;
 var particleOptions;
 var cloth;
-var puntuacion = 0;
+var puntuacion = 1;
 var idRep = null;
-// var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {preload: preload, create: create, update: update});
-var score=0;
+var score;
 
 
 // var group;
@@ -104,7 +103,7 @@ function draw() {
     for ( i = 0 ; i < contadorBolas ; i++ ) {
       bola[i].show();
    }
-   stroke(1);
+   stroke(0);
    strokeWeight(4);
    //box.show();
    backboard.show();
@@ -122,23 +121,46 @@ function draw() {
    line(cloth.bodies[14].position.x, cloth.bodies[14].position.y, cloth.bodies[19].position.x, cloth.bodies[19].position.y);
    line(cloth.bodies[19].position.x, cloth.bodies[19].position.y, cloth.bodies[24].position.x, cloth.bodies[24].position.y);
 
-   if (contadorBolas >= 2) {
+    if (contadorBolas >= 2) {
       if (( ((bola[contadorBolas - 2 ].body.position.y) >= (cloth.bodies[0].position.y ))  &&
             ((bola[contadorBolas - 2].body.position.y ) <= (cloth.bodies[0].position.y + 10))) &&
             (((bola[contadorBolas - 2 ].body.position.x) >= (cloth.bodies[0].position.x ))  &&
             ((bola[contadorBolas - 2].body.position.x ) <= (cloth.bodies[4].position.x)) )) {
          if (idRep !== bola[contadorBolas - 2 ].body.id ) {
-            score++;
-            puntuacion = puntuacion + 1;
+           
+            
+            //puntuacion = puntuacion + 1;
             console.log('puntuacion: ' + puntuacion)
             idRep = bola[contadorBolas - 2 ].body.id;
+            //puntuacion++;
+           puntaje();
+
          }
       }
    }
 }
 
 
+function puntaje(){
+  document.getElementById("puntuacion").value=puntuacion;
+  puntuacion=puntuacion+1;
+   
+  
+}
+function record(){
+  if(minutos ===0 && segundos ===0){
+    puntuacion=score;
+    return score
+
+
+  }
+
+
+}
+record();
+
 function mouseReleased( event ) {
+ 
    if (bola[contadorBolas - 1].body == mConstraint.body ) {
       setTimeout(() => {
        slingshot.fly();
@@ -150,12 +172,5 @@ function mouseReleased( event ) {
           }, 200);
       }, 70);
    }
-}
+  }
 
-function mouseDragged ( event ) {
-   if (bola[contadorBolas - 1].body == mConstraint.body ) {
-      if (mConstraint.body.angle !== 0) {
-         
-      }
-   }
-}

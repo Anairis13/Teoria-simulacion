@@ -1,46 +1,101 @@
-<!DOCTYPE html>
-<html lang="es">
-   <head>
-      <style>
-         h1
-         {
-             color:black;
-         }
-     </style>
-   </head>
-<body>
-      <h1><input type="hola"></h1>
-</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+ <head>
+     <body>
+         <a href="index.html">indexp</a>
+     </body>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <script type="text/javascript">
 
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Basketball</title>
-    <link rel="stylesheet" href="librerias/bootstrap/css/bootstrap.css">
-    <link rel="shortcut icon" href="ball.png">
-</head>
-   <body onload="cuentaAtras()">
-        <div id="ventana">
-            <div id="reloj"></div>
-        </div>
 
-        <script src="librerias/p5.min.js"></script>
-        <script src="librerias/p5.dom.min.js"></script>
-        <script src="librerias/p5.sound.min.js"></script>
-        <script src="librerias/matter.js"></script>
-        <script src="slingshot.js"></script>
-        <script src="bola.js"></script>
-        <script src="box.js"></script>
-        <script src="ground.js"></script>
-        <script src="librerias/bootstrap/js/bootstrap.js"></script>
-        <script src="librerias/jquery/jquery.min.js"></script>
-        <script src="librerias/popper/popper.min.js"></script>
-        <script src="sketch.js"></script>
-        <script src="score.js"></script>
-        <script src="cronometro.js"></script>
-        <script type="text/javascript">
-        function abrir() {
-           window.open("index.html", "popupId", "location=no,menubar=no,titlebar=no,resizable=no,toolbar=no, menubar=no,width=500,height=500");
-        }
-        </script>
-   </body>
+
+ function cerrar(){
+     window.close("indexp.html", "popupId", "location=no,menubar=no,titlebar=no,resizable=no,toolbar=no, menubar=no,width=500,height=500");
+ }
+ </script>
+
+ </head>
+  <style>
+
+      body{background-color:midnightblue;}
+      h1{color: yellow}
+      h1{text-align: center;}
+      h1{height: 100;}
+      h1{text-anchor: start;}
+      button{border-bottom: yellow;
+      background:yellow;
+      text-align: center;
+      color: white;
+      font-size: 70px;
+      font-weight: 600;
+      padding-bottom:20px;
+      padding-left: 40px;
+      padding-right: 40px;
+      text-align: center;
+      background-position: 20px;
+      border-radius: 10px;
+      position: relative;
+      left: 15%;
+      height: 150;
+      top: 20;
+      bottom: -100px;
+      margin-left: 20px;
+
+
+      }
+      .button {border-bottom: yellow;
+      background:yellow;
+      text-align: center;
+      color: white;
+      font-size: 70px;
+      font-weight: 600;
+      padding-bottom:20px;
+      padding-left: 40px;
+      padding-right: 40px;
+      text-align: center;
+      background-position: 20px;
+      border-radius: 10px;
+      position: relative;
+      left: 50%;
+      height: 100;
+      top: 20;
+      bottom: -100px;
+      margin-left: 20px;
+
+      }
+      img{ margin-left: 10px;
+      width: 150px;
+      height: 150px;
+      vertical-align: middle;
+      border:0px;
+      top:300px;
+      margin-top: 20px;
+      position: relative;
+      left: 560px;
+
+
+
+
+
+      }
+  </style>
+ <body>
+ <h1 id="text">Simulador Basketball.</h1>
+
+ <p id="deHijo"2></p>
+ <p>
+    <img src="img1/imagn1.png" aling="left"  >
+        <a href="indexplay.html"><button onclick location.href="indexplay.html">Jugar</button> </a>
+        <button onclick="cerrar();">Salir.</button>
+
+ </p>
+  <div id="juego">
+
+
+  </div>
+
+
+
+ </body>
 </html>
