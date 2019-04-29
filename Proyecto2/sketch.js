@@ -1,5 +1,5 @@
 
-const {World, Bodies, Mouse, MouseConstraint, Constraint } = Matter;
+const {World, Bodies, Mouse, MouseConstraint, Constraint, Vector } = Matter;
 var   Events = Matter.Events,
       Engine = Matter.Engine;
 
@@ -24,16 +24,19 @@ var backboard;
 var group;
 var particleOptions;
 var cloth;
-var puntuacion = 1;
+var puntuacion = 0;
 var idRep = null;
-var score;
-
+// var game = new Phaser.Game(480, 320, Phaser.AUTO, null, {preload: preload, create: create, update: update});
+var score=0;
+var vectorA;
+var vectorB;
 
 // var group;
 
 
 function preload() {
     ballImg = loadImage('ball.png');
+    fondo = loadImage('img/fondoplay.jpg');
     if ( windowWidth < 500 ) {
       tamanioBola = windowWidth * 0.04;
       tamanioAncho = windowWidth*0.25;
@@ -71,7 +74,7 @@ function setup() {
     //cuadradoPrueba = rect(200, 200, 50, 100 );
     // console.log(cuadradoPrueba);
 
-
+    console.log(bola[contadorBolas - 1]);
     /********************************************************************************/
 
    group = Body.nextGroup(true);
@@ -96,14 +99,14 @@ function setup() {
 
 
 function draw() {
-    background(248);
+    background(106,159,167);
     Engine.update(engine);
     ground.show();
     slingshot.show();
     for ( i = 0 ; i < contadorBolas ; i++ ) {
       bola[i].show();
    }
-   stroke(0);
+   stroke(1);
    strokeWeight(4);
    //box.show();
    backboard.show();
@@ -121,46 +124,24 @@ function draw() {
    line(cloth.bodies[14].position.x, cloth.bodies[14].position.y, cloth.bodies[19].position.x, cloth.bodies[19].position.y);
    line(cloth.bodies[19].position.x, cloth.bodies[19].position.y, cloth.bodies[24].position.x, cloth.bodies[24].position.y);
 
-    if (contadorBolas >= 2) {
+   if (contadorBolas >= 2) {
       if (( ((bola[contadorBolas - 2 ].body.position.y) >= (cloth.bodies[0].position.y ))  &&
             ((bola[contadorBolas - 2].body.position.y ) <= (cloth.bodies[0].position.y + 10))) &&
             (((bola[contadorBolas - 2 ].body.position.x) >= (cloth.bodies[0].position.x ))  &&
             ((bola[contadorBolas - 2].body.position.x ) <= (cloth.bodies[4].position.x)) )) {
          if (idRep !== bola[contadorBolas - 2 ].body.id ) {
-           
-            
-            //puntuacion = puntuacion + 1;
+            score++;
+            puntuacion = puntuacion + 1;
             console.log('puntuacion: ' + puntuacion)
             idRep = bola[contadorBolas - 2 ].body.id;
-            //puntuacion++;
-           puntaje();
-
+            $("#puntuacion").text(puntuacion);
          }
       }
    }
 }
 
 
-function puntaje(){
-  document.getElementById("puntuacion").value=puntuacion;
-  puntuacion=puntuacion+1;
-   
-  
-}
-function record(){
-  if(minutos ===0 && segundos ===0){
-    puntuacion=score;
-    return score
-
-
-  }
-
-
-}
-record();
-
 function mouseReleased( event ) {
- 
    if (bola[contadorBolas - 1].body == mConstraint.body ) {
       setTimeout(() => {
        slingshot.fly();
@@ -172,5 +153,33 @@ function mouseReleased( event ) {
           }, 200);
       }, 70);
    }
-  }
+}
 
+function mouseDragged ( event ) {
+   if (bola[contadorBolas - 1].body == mConstraint.body ) {
+
+      vectorA = slingshot.sling.pointA;
+      vectorB = slingshot.sling.bodyB.position;
+      // console.log("Ángulo: " + Vector.angle(vectorA, vectorB)* 57.2957);
+      $("#angulo").text((Vector.angle(vectorA, vectorB)* 57.2957).toFixed(2));
+      $("#velocidad").text(sqrt(((vectorA.x - vectorB.x)*(vectorA.x - vectorB.x)) + ((vectorA.y - vectorB.y)*(vectorA.y - vectorB.y))).toFixed(2));
+   }
+}
+//
+// function start(time) {
+//     if (time <= 0) {
+//         clearTimeout(timeKeep);
+//         World.clear(engine.world, { keepStatic: true });
+//         $("#reloj").text('GAME OVER');
+//         // timeClock[0].innerText = "Game Over";
+//     } else {
+//         timeKeep = setTimeout(function() {
+//            time = time - .01;
+//            $("#reloj").text(time.toFixed(2));
+//             // timeClock[0].innerText = time.toFixed(2);
+//             start(time);
+//         }, 10);
+//     }
+// }
+
+// start(100);

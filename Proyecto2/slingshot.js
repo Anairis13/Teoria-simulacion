@@ -20,7 +20,6 @@ class SlingShot {
   }
 
   fly() {
-
     this.sling.bodyB = null;
   }
 

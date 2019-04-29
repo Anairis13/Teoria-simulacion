@@ -8,15 +8,14 @@ function cuentaAtras(){
     segundos = segundos % 60;
     document.getElementById("reloj").innerHTML=ceromin+minutos+':'+ceroseg+segundos;
      if (minutos ===0 && segundos ===0){
-        //document.write("Se acabo el tiempo");
+        // alert ("Se acabo el tiempo");
+        // clearTimeOut(llamada);
+        var fecha = new Date();
+        $("#pantallaFin").css("display", "block");
+        $("#actualPuntos").text(puntuacion);
+        $("#actualLanzamientos").text((contadorBolas - 1));
+        $("#actualFecha").text((fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear()));
 
-
-        setTimeout(5000);
-        redireccionar();
-        record();
-
-
-        clearTimeOut(llamada);
     }
     if (segundos ==0){
         minutos --;
@@ -38,11 +37,4 @@ function cuentaAtras(){
         ceroseg='';
     }
      return ceroseg;return ceromin;
- }
- function redireccionar(){
-       // document.getElementById("puntaje").value=score;
-    window.location="index2.html"
-
-
-
  }
