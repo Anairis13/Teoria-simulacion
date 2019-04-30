@@ -1,0 +1,79 @@
+body{
+   height: 100%;
+   width: 100%;
+}
+
+#reloj {
+   height: auto;
+   width: auto;
+   font-size: 30px;
+}
+#ventana{
+   height: auto;
+   width: 150px;
+}
+
+.card-header{
+   background-color: #909CA7;
+   color: white;
+}
+
+#defaultCanvas0{
+   height: 99% !important;
+   width: 99% !important;
+}
+#puntuacion{
+   font-size: 30px;
+}
+
+#texto{
+   position: absolute;
+   right: 1%;
+}
+#pantallaInicio{
+   background-image: url("../img/fondop1.jpg");
+   position: absolute;
+}
+#pantallaFin{
+   display: none;
+   position: absolute;
+   background-color: #01585C;
+
+}
+img{
+   width: 150px;
+   height: 150px;
+}
+
+h1{
+   font-size: 100px;
+   font-weight: bold;
+   margin-top: 20px;
+   color: yellow;
+   text-align: center;
+   width: 100%;
+   text-anchor: start;
+}
+.botones{
+   width: 100%;
+   text-align: center;
+}
+
+button{
+   text-align: center;
+   color: white;
+   font-size: 70px;
+   font-weight: 600;
+   padding-bottom:20px;
+   padding-left: 40px;
+   padding-right: 40px;
+   text-align: center;
+   background-position: 20px;
+   border-radius: 10px;
+   position: relative;
+   margin-top: 5%;
+}
+
+p{
+   margin: 0;
+}

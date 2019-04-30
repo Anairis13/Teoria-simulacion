@@ -108,8 +108,9 @@ function draw() {
    }
    stroke(1);
    strokeWeight(4);
-   //box.show();
    backboard.show();
+
+   // Creación de las lineas de la canasta
    line(cloth.bodies[0].position.x, cloth.bodies[0].position.y, cloth.bodies[4].position.x, cloth.bodies[4].position.y);
    for (var i = 0; i < cloth.bodies.length-1; i++) {
       rect(cloth.bodies[i].position.x, cloth.bodies[i].position.y, 1, 1);
@@ -124,15 +125,14 @@ function draw() {
    line(cloth.bodies[14].position.x, cloth.bodies[14].position.y, cloth.bodies[19].position.x, cloth.bodies[19].position.y);
    line(cloth.bodies[19].position.x, cloth.bodies[19].position.y, cloth.bodies[24].position.x, cloth.bodies[24].position.y);
 
+   // Gracias a esto tenemos en cuenta las canastas hechas por el jugador
    if (contadorBolas >= 2) {
       if (( ((bola[contadorBolas - 2 ].body.position.y) >= (cloth.bodies[0].position.y ))  &&
             ((bola[contadorBolas - 2].body.position.y ) <= (cloth.bodies[0].position.y + 10))) &&
             (((bola[contadorBolas - 2 ].body.position.x) >= (cloth.bodies[0].position.x ))  &&
             ((bola[contadorBolas - 2].body.position.x ) <= (cloth.bodies[4].position.x)) )) {
          if (idRep !== bola[contadorBolas - 2 ].body.id ) {
-            score++;
             puntuacion = puntuacion + 1;
-            console.log('puntuacion: ' + puntuacion)
             idRep = bola[contadorBolas - 2 ].body.id;
             $("#puntuacion").text(puntuacion);
          }
@@ -140,7 +140,7 @@ function draw() {
    }
 }
 
-
+// como su nombre lo indica, función que nos servirá para lanzar la bola despues de arrastrarla
 function mouseReleased( event ) {
    if (bola[contadorBolas - 1].body == mConstraint.body ) {
       setTimeout(() => {
@@ -155,31 +155,12 @@ function mouseReleased( event ) {
    }
 }
 
+// como su nombre lo indica, "escucha" el envento del mouse siendo arreatrado despues de un click con esta función manejamos el ángula y la velocidad
 function mouseDragged ( event ) {
    if (bola[contadorBolas - 1].body == mConstraint.body ) {
-
       vectorA = slingshot.sling.pointA;
       vectorB = slingshot.sling.bodyB.position;
-      // console.log("Ángulo: " + Vector.angle(vectorA, vectorB)* 57.2957);
       $("#angulo").text((Vector.angle(vectorA, vectorB)* 57.2957).toFixed(2));
       $("#velocidad").text(sqrt(((vectorA.x - vectorB.x)*(vectorA.x - vectorB.x)) + ((vectorA.y - vectorB.y)*(vectorA.y - vectorB.y))).toFixed(2));
    }
 }
-//
-// function start(time) {
-//     if (time <= 0) {
-//         clearTimeout(timeKeep);
-//         World.clear(engine.world, { keepStatic: true });
-//         $("#reloj").text('GAME OVER');
-//         // timeClock[0].innerText = "Game Over";
-//     } else {
-//         timeKeep = setTimeout(function() {
-//            time = time - .01;
-//            $("#reloj").text(time.toFixed(2));
-//             // timeClock[0].innerText = time.toFixed(2);
-//             start(time);
-//         }, 10);
-//     }
-// }
-
-// start(100);

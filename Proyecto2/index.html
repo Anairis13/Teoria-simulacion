@@ -4,89 +4,9 @@
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Basketball</title>
-    <link rel="stylesheet" href="librerias/bootstrap/css/bootstrap.css">
+   <link rel="stylesheet" href="librerias/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="css/custom.css">
     <link rel="shortcut icon" href="ball.png">
-      <style media="screen">
-         body{
-            height: 100%;
-            width: 100%;
-         }
-
-         #reloj {
-            height: auto;
-            width: auto;
-            font-size: 30px;
-         }
-         #ventana{
-            height: auto;
-            width: 150px;
-         }
-
-         .card-header{
-            background-color: #909CA7;
-            color: white;
-         }
-
-         #defaultCanvas0{
-            height: 99% !important;
-            width: 99% !important;
-         }
-         #puntuacion{
-            font-size: 30px;
-         }
-
-         #texto{
-            position: absolute;
-            right: 1%;
-         }
-         #pantallaInicio{
-            background-image: url("img/fondop1.jpg");
-            position: absolute;
-         }
-         #pantallaFin{
-            display: none;
-            position: absolute;
-            background-color: #01585C;
-
-         }
-         img{
-            width: 150px;
-            height: 150px;
-         }
-
-         h1{
-            font-size: 100px;
-            font-weight: bold;
-            margin-top: 20px;
-            color: yellow;
-            text-align: center;
-            width: 100%;
-            text-anchor: start;
-         }
-         .botones{
-            width: 100%;
-            text-align: center;
-         }
-
-         button{
-            text-align: center;
-            color: white;
-            font-size: 70px;
-            font-weight: 600;
-            padding-bottom:20px;
-            padding-left: 40px;
-            padding-right: 40px;
-            text-align: center;
-            background-position: 20px;
-            border-radius: 10px;
-            position: relative;
-            margin-top: 5%;
-         }
-
-         p{
-            margin: 0;
-         }
-      </style>
 </head>
    <body>
       <!-- esta ventana está el cronometro, la puntuacion y las variables de disparo (angulo y velocidad) -->
@@ -135,7 +55,7 @@
          <h1 id="text">Simulador Basketball</h1>
          <div class="botones">
             <button class="btn-success" onclick="abrir();">Jugar</button>
-            <button class="btn-info"onclick="cerrar();">Puntuaciones</button>
+            <button class="btn-info"onclick="puntuacionpg();">Puntuaciones</button>
             <p>
                <img src="ball.png" style="margin-top: 10%" >
             </p>
@@ -153,7 +73,7 @@
                <h2 style="color: yellow">TUS ESTADÍSTICAS SON: </h2>
             </div>
             <div class="d-flex">
-               <div class="card col-3 p-0 text-center m-auto">
+               <div class="card col-2 p-0 text-center m-auto">
                   <div class="card-header">
                      PUNTOS
                   </div>
@@ -161,7 +81,7 @@
 
                   </div>
                </div>
-               <div class="card col-3 p-0 text-center m-auto">
+               <div class="card col-2 p-0 text-center m-auto">
                   <div class="card-header">
                      LANZAMIENTOS
                   </div>
@@ -169,11 +89,19 @@
 
                   </div>
                </div>
-               <div class="card col-3 p-0 text-center m-auto">
+               <div class="card col-2 p-0 text-center m-auto">
+                  <div class="card-header">
+                     EFICIENCIA
+                  </div>
+                  <div class="CARD-BODY p-3" style="font-size: 50px" id="actualEficiencia">
+                     
+                  </div>
+               </div>
+               <div class="card col-2 p-0 text-center m-auto">
                   <div class="card-header">
                      FECHA
                   </div>
-                  <div class="CARD-BODY p-3" style="font-size: 50px" id="actualFecha">
+                  <div class="CARD-BODY p-3" style="font-size: 30px" id="actualFecha">
 
                   </div>
                </div>
@@ -186,7 +114,7 @@
                 <!-- <input class="form-control text-center" type="text" value="Lester Flores"readonly> -->
             </div>
             <div class="d-flex">
-               <div class="card col-3 p-0 text-center m-auto">
+               <div class="card col-2 p-0 text-center m-auto">
                   <div class="card-header">
                      PUNTOS
                   </div>
@@ -194,7 +122,7 @@
                      100
                   </div>
                </div>
-               <div class="card col-3 p-0 text-center m-auto">
+               <div class="card col-2 p-0 text-center m-auto">
                   <div class="card-header">
                      LANZAMIENTOS
                   </div>
@@ -202,11 +130,19 @@
                      105
                   </div>
                </div>
-               <div class="card col-3 p-0 text-center m-auto">
+               <div class="card col-2 p-0 text-center m-auto">
+                  <div class="card-header">
+                     EFICIENCIA
+                  </div>
+                  <div class="CARD-BODY p-3" style="font-size: 50px" id="recordEficiencia">
+                     98%
+                  </div>
+               </div>
+               <div class="card col-2 p-0 text-center m-auto">
                   <div class="card-header">
                      FECHA
                   </div>
-                  <div class="CARD-BODY p-3" style="font-size: 50px" id="recordFecha">
+                  <div class="CARD-BODY p-3" style="font-size: 30px" id="recordFecha">
                      29/04/2019
                   </div>
                </div>
@@ -220,26 +156,30 @@
 
 
 
-      <script src="librerias/p5.min.js"></script>
-      <script src="librerias/p5.dom.min.js"></script>
-      <script src="librerias/p5.sound.min.js"></script>
-      <script src="librerias/matter.js"></script>
-      <script src="slingshot.js"></script>
-      <script src="bola.js"></script>
-      <script src="box.js"></script>
       <script src="ground.js"></script>
       <script src="librerias/bootstrap/js/bootstrap.js"></script>
       <script src="librerias/jquery/jquery.min.js"></script>
       <script src="librerias/popper/popper.min.js"></script>
-      <script src="sketch.js"></script>
-      <script src="score.js"></script>
-      <script src="cronometro.js"></script>
+      <script src="librerias/p5.min.js"></script>
+      <script src="librerias/p5.dom.min.js"></script>
+      <script src="librerias/p5.sound.min.js"></script>
+      <script src="librerias/matter.js"></script>
+      <script src="js/slingshot.js"></script>
+      <script src="js/bola.js"></script>
+      <script src="js/box.js"></script>
+      <script src="js/sketch.js"></script>
+      <script src="js/cronometro.js"></script>
+      <script src="js/ground.js" charset="utf-8"></script>
 
       <!-- Llamado a la función de inicio -->
       <script type="text/javascript">
             function abrir() {
                $("#pantallaInicio").css("display", "none");
                cuentaAtras();
+            }
+            function puntuacionpg() {
+               $("#pantallaInicio").css("display", "none");
+               $("#pantallaFin").css("display", "block");
             }
          </script>
    </body>

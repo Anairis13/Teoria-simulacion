@@ -15,6 +15,7 @@ function cuentaAtras(){
         $("#actualPuntos").text(puntuacion);
         $("#actualLanzamientos").text((contadorBolas - 1));
         $("#actualFecha").text((fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear()));
+        $("#actualEficiencia").text((puntuacion/(contadorBolas-1)*100).toFixed(2) + "%");
 
     }
     if (segundos ==0){
